@@ -127,6 +127,8 @@ define([], function(){
         hoverboxHighlightColor: "green",
         mainGlowColor: "green",
         secondaryGlowColor: "#556B2F"
+        maxPEDexportContainerHeight: 600,
+        minPEDexportContainerHeight: 250
     };
 
     return PedigreeEditorParameters;

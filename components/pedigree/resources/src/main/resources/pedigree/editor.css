@@ -1213,8 +1213,7 @@
 .deceased .callout-handle {
   margin-left: 0px;
 }
-.scrollable-container {
-  max-height: 500px;
+#scrollable-container {
   overflow: auto;
   margin-left: 3em;
   margin-top: 0.5em;
