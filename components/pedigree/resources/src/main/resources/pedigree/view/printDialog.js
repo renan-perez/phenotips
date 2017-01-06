@@ -211,7 +211,7 @@ define([
          */
         _adjustPreviewWindowHeight: function() {
             GraphicHelpers.adjustPreviewWindowHeight("pedigree-print-dialog", 'printPreview', this._minPreviewHeight, this._maxPreviewHeight);
-        }
+        },
 
         /**
          * Updates print preview using currently selected zoom level.

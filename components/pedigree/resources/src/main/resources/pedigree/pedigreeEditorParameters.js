@@ -126,7 +126,7 @@ define([], function(){
         minPrintPreviewPaneHeight: 250,
         hoverboxHighlightColor: "green",
         mainGlowColor: "green",
-        secondaryGlowColor: "#556B2F"
+        secondaryGlowColor: "#556B2F",
         maxPEDexportContainerHeight: 600,
         minPEDexportContainerHeight: 250
     };
