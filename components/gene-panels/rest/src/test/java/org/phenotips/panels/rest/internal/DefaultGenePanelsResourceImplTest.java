@@ -47,7 +47,7 @@ import org.slf4j.Logger;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -73,6 +73,9 @@ public class DefaultGenePanelsResourceImplTest
 
     @Mock
     private GenePanelsLoadingCache loadingCache;
+
+    @Mock
+    private LoadingCache<String, JSONObject> cache;
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -351,7 +354,6 @@ public class DefaultGenePanelsResourceImplTest
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void getGeneCountsFromPhenotypesNoGeneDataReturned() throws Exception
     {
         final Request request = mock(Request.class);
@@ -362,8 +364,7 @@ public class DefaultGenePanelsResourceImplTest
         doReturn("2").when(request).getProperty("numResults");
         doReturn("1").when(request).getProperty("reqNo");
 
-        final LoadingCache mockCache = mock(LoadingCache.class);
-        doReturn(mockCache).when(this.loadingCache).getCache();
+        doReturn(this.cache).when(this.loadingCache).getCache();
 
         // ExecutionException is protected, use reflection to get class instance.
         final Class<?> executionExceptionClass = Class.forName("java.util.concurrent.ExecutionException");
@@ -371,7 +372,7 @@ public class DefaultGenePanelsResourceImplTest
         constructor.setAccessible(true);
         final ExecutionException executionException = (ExecutionException) constructor.newInstance();
 
-        doThrow(executionException).when(mockCache).get(Matchers.anyString());
+        doThrow(executionException).when(this.cache).get(Matchers.anyString());
 
         final Response response = this.component.getGeneCountsFromPhenotypes();
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());

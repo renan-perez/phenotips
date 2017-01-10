@@ -17,12 +17,9 @@
  */
 package org.phenotips.panels.rest.internal;
 
-import org.phenotips.vocabulary.VocabularyManager;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.jmock.auto.Mock;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,8 +28,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
 
 /**
  * Unit tests for {@link DefaultGenePanelsLoadingCacheImpl}.
