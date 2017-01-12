@@ -238,7 +238,7 @@
       this._initServerSelector();
       this._initMainFormActions();
 
-      var title = this._pushManyPatients ? "$services.localization.render('phenotips.patientSharing.push.dialog.title.multiplePatients')" : "$services.localization.render('phenotips.patientSharing.push.dialog.title.singlePatient')".replace("__patientID__", this._patientId);
+      var title = this._pushManyPatients ? "$services.localization.render('phenotips.patientSharing.push.dialog.title.multiplePatients')" : "$services.localization.render('phenotips.patientSharing.push.dialog.title.singlePatient', [this._patientId])";
       this._dialog = new PhenoTips.widgets.ModalPopup(this._container, false, {'title': title, 'verticalPosition': 'top', 'removeOnClose': false});
     },
 
@@ -639,7 +639,7 @@
            this._onUnapprovedUser();
            this._logoutUser();
         }.bind(this));
-        var preApprovedOption = _addUserOption(preApprovedChecked, "check", "$services.localization.render('phenotips.PushPatient.currentlyAuthenticatedMessage')".replace("__lastApprovedUser__", "&lt;strong&gt;"+this._lastApprovedUser+"&lt;/strong&gt; &amp;nbsp;"),
+        var preApprovedOption = _addUserOption(preApprovedChecked, "check", "$services.localization.render('phenotips.PushPatient.currentlyAuthenticatedMessage', ["&lt;strong&gt;"+this._lastApprovedUser+"&lt;/strong&gt; &amp;nbsp;"])",
                                                function(){
                                                  this._userLoginError.hide();
                                                  this._onUnapprovedUser();
@@ -738,7 +738,7 @@
       if (!this._updatingExistingPatient())  {
           var noGroupMessage = "&lt;span class ='hint'&gt;$services.localization.render('phenotips.PushPatient.noGroupMessage')&lt;/span&gt;";
           if (groupList.length == 0) {
-            noGroupMessage += " $services.localization.render('phenotips.PushPatient.noGroupMessageHint')".replace("__lastApprovedUser__", this._lastApprovedUser);
+            noGroupMessage += " $services.localization.render('phenotips.PushPatient.noGroupMessageHint', [this._lastApprovedUser])";
           }
           groupListElement.insert(_addGroupOption(true, "user", noGroupMessage, "__self"));
 
@@ -848,7 +848,7 @@
            }
 
            description.insert(" $services.localization.render('phenotips.PushPatient.patientUploadedAsID') ").insert(new Element('a', {'href' : serverData.remoteURL, 'target' : '_blank'}).update(serverData.remoteID)).insert('.');
-           description.insert("&lt;br/&gt;$services.localization.render('phenotips.PushPatient.patientUploadedUpdate')".replace("__serverID__", this._selectedServer))
+           description.insert("&lt;br/&gt;$services.localization.render('phenotips.PushPatient.patientUploadedUpdate', [this._selectedServer])");
            existingPatientDataInfo.insert(description);
 
            var _this = this;
@@ -1074,7 +1074,7 @@
                 //_this._dialog.closeDialog();
               } catch (e) {
                 console.log("EXCEPTION: " + e);
-                _this._pushResultSection.update(_this._generateFailedToPushPatient("$services.localization.render('phenotips.PushPatient.pushFailedException')".replace("__e__", e), true));
+                _this._pushResultSection.update(_this._generateFailedToPushPatient("$services.localization.render('phenotips.PushPatient.pushFailedException', [e])", true));
               }
           },
           onFailure : function(response) {
@@ -1146,13 +1146,13 @@
                        pushResult.innerHTML = pushResult.innerHTML.replace(/Pushing (\w+?)\.\.\.$/, "");
                        var newURL       = _this._remoteServers[_this._selectedServer].url + previousPushResult.patienturl;
                        var linkToRemote = "&lt;a href='" + newURL + "' target='_blank'&gt;" + previousPushResult.patientid + "&lt;/a&gt;";
-                       pushResult.insert("&lt;div class='pushed-ok-message'&gt;" + "$services.localization.render('phenotips.PushPatient.successfulPushWithId')".replace("__prevPatientID__", prevPatientID).replace("__linkToRemote__", linkToRemote) + "&lt;/div&gt;");
+                       pushResult.insert("&lt;div class='pushed-ok-message'&gt;" + "$services.localization.render('phenotips.PushPatient.successfulPushWithId', [prevPatientID, linkToRemote])" + "&lt;/div&gt;");
                    }
                }
                // push next
                if (next &lt; patients.length) {
                    var nextPatientID = patients[next++];
-                   pushResult.insert("$services.localization.render('phenotips.PushPatient.pushing')".replace("__nextPatientID__", nextPatientID));
+                   pushResult.insert("$services.localization.render('phenotips.PushPatient.pushing', [nextPatientID])");
                    _this._pushPatient(columns, nextPatientID, pushSingleFunc);
                }
             }
@@ -1163,7 +1163,7 @@
             if (patients.length == 0) {
                 return;
             }
-            var confirmMessage = "$services.localization.render('phenotips.PushPatient.confirmMessage')".replace("__numPatients__", patients.length).replace("__selectServer__",  _this._selectedServer)+ "&lt;br/&gt;&lt;div class='plainmessage multi-push-patient-list'&gt;&lt;ol&gt;";
+            var confirmMessage = "$services.localization.render('phenotips.PushPatient.confirmMessage', [patients.length, _this._selectedServer])" + "&lt;br/&gt;&lt;div class='plainmessage multi-push-patient-list'&gt;&lt;ol&gt;";
             patients.each(function(item) {
                 confirmMessage += "&lt;li&gt;" + item + "&lt;/li&gt;";
             });
