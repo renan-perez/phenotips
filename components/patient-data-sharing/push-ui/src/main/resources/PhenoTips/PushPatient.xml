@@ -841,7 +841,8 @@
               description.insert(" $services.localization.render('phenotips.PushPatient.patientUploadedLessThanHour')");
            } else {
               if (lastUpdated &gt;= 48) {
-                  description.insert(" $services.localization.render('phenotips.PushPatient.patientUploadedDays', [Math.floor(lastUpdated/24)])");
+                  var days = Math.floor(lastUpdated/24);
+                  description.insert(" $services.localization.render('phenotips.PushPatient.patientUploadedDays', [days])");
               } else {
                   description.insert(" $services.localization.render('phenotips.PushPatient.patientUploadedHours',[lastUpdated])");
               }
