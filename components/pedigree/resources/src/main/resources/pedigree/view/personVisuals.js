@@ -627,6 +627,8 @@ define([
                 var x = this.getX() + this._shapeRadius*mult - 10; // adjusting position not to collide with evaluation status
                 var y = this.getY() + this._shapeRadius*mult;
                 this._awLabel = editor.getPaper().text(x, y, "A&W").attr(PedigreeEditorParameters.attributes.aliveAndWellShape).toBack();
+            } else {
+                this._awLabel = null;
             }
         },
 
@@ -1100,7 +1102,7 @@ define([
          */
         getAllGraphics: function($super) {
             //console.log("Node " + this.getNode().getID() + " getAllGraphics");
-            return $super().push(this.getHoverBox().getBackElements(), this.getLabels(), this._linkArea, this.getCarrierGraphics(), this.getEvaluationGraphics(), this.getHoverBox().getFrontElements());
+            return $super().push(this.getHoverBox().getBackElements(), this.getLabels(), this._awLabel, this._linkArea, this.getCarrierGraphics(), this.getEvaluationGraphics(), this.getHoverBox().getFrontElements());
         },
 
         /**
