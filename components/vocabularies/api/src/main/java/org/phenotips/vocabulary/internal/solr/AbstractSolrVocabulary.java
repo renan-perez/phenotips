@@ -27,6 +27,7 @@ import org.xwiki.component.phase.Initializable;
 import org.xwiki.component.phase.InitializationException;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -170,6 +171,12 @@ public abstract class AbstractSolrVocabulary implements Vocabulary, Initializabl
     public long count(Map<String, ?> fieldValues)
     {
         return count(this.generateLuceneQuery(fieldValues));
+    }
+
+    @Override
+    public Collection<String> getSupportedCategories()
+    {
+        return Collections.emptyList();
     }
 
     @Override

@@ -59,4 +59,16 @@ public interface VocabularyManager
      * @return A list of vocabulary ids. One id for each vocabulary.
      */
     List<String> getAvailableVocabularies();
+
+    /**
+     * Suggest the terms that best match the user's input, in all vocabularies
+     * {@link Vocabulary#getSupportedCategories() supporting the target category of terms}.
+     *
+     * @param input the text to search for
+     * @param category the category of terms to search in
+     * @param maxResults the maximum number of terms to be returned
+     * @return a list of suggestions, possibly empty
+     * @since 1.4
+     */
+    List<VocabularyTerm> search(String input, String category, int maxResults);
 }
